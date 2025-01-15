@@ -6,24 +6,23 @@ import MenuItem from "./MenuItem";
 import Header from "./Header";
 import styles from "./Menu.module.scss";
 import { useState } from "react";
-import { data } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const defaultfn = () => {};
-function Menu({ children, items = [], onChange = defaultfn }) {
+const defaultFn = () => {};
+function Menu({ children, items = [], onChange = defaultFn }) {
   const [history, setHistory] = useState([{ data: items }]);
   const current = history[history.length - 1];
 
   const renderItems = () => {
     return current.data.map((item, index) => {
-      const isParaent = !!item.children;
+      const isParent = !!item.children;
       return (
         <MenuItem
           key={index}
           data={item}
           onClick={() => {
-            if (isParaent) {
+            if (isParent) {
               setHistory(prev => [...prev, item.children]);
             } else {
               onChange(item);
@@ -38,6 +37,7 @@ function Menu({ children, items = [], onChange = defaultfn }) {
     <Tippy
       delay={[0, 500]}
       interactive
+      visible
       placement="bottom-end"
       render={attrs =>
         <div className={cx("menu-list")} tabIndex="-1" {...attrs}>
@@ -52,6 +52,7 @@ function Menu({ children, items = [], onChange = defaultfn }) {
             {renderItems()}
           </PopperWrapper>
         </div>}
+      onHide={() => setHistory(prev => prev.slice(0, 1))}
     >
       {children}
     </Tippy>
