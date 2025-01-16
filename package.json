@@ -18,11 +18,13 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
+    "tippy.js": "^6.3.7",
     "web-vitals": "^4.2.4"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.2",
     "customize-cra": "^1.0.0",
+    "prettier": "^3.4.2",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.83.1"
   },
