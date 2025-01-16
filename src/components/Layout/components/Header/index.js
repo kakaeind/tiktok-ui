@@ -10,7 +10,6 @@ import {
   faGear,
   faKeyboard,
   faSignOut,
-
   faUser
 } from "@fortawesome/free-solid-svg-icons";
 
