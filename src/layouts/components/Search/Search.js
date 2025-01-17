@@ -21,15 +21,15 @@ const cx = classNames.bind(styles)
 function Search() {
   const [searchValue,setSearchValue] = useState('')
     const [searchResult, setSearchResult] = useState([]);
-  const [showResult,setShowResult] = useState(true)
+  const [showResult,setShowResult] = useState(false)
   const [loading,setLoading] = useState(false)
   // 1: ' lần 1 debounced là chuỗi rỗng'
   // 2: ''
-  const debounced = useDebounce(searchValue,500)
+  const debouncedValue = useDebounce(searchValue,500)
 
   const inputRef = useRef()
   useEffect(() => {
-    if(!debounced.trim()){
+    if(!debouncedValue.trim()){
       setSearchResult([])
       return;
     }
@@ -37,7 +37,7 @@ function Search() {
    const fetchApi = async ()=>{
 setLoading(true)
 
-    const result = await searchService.search(debounced);
+    const result = await searchService.search(debouncedValue);
     setSearchResult(result);
 
     
@@ -49,7 +49,7 @@ setLoading(false)
 
     
   
-  }, [debounced]); // nó đưa vào debounced ở đây
+  }, [debouncedValue]); // nó đưa vào debounced ở đây
 
   const handleClear =()=>{
     setSearchValue('')
@@ -59,7 +59,7 @@ setLoading(false)
 
   const handleHideResult =()=>{
 setShowResult(false)
-  } 
+  }  
   
   const handleChange = (e) =>{
 const searchValue = e.target.value
@@ -82,9 +82,7 @@ if (!searchValue.startsWith(' ')) {
                 <PopperWrapper>
                   <h4 className={cx("search-title")}>Account</h4>
                   {searchResult.map((result) =>(
-  
                     <AccountItem key={result.id} data ={result}  />
-  
                   ))}
               
                 </PopperWrapper>
