@@ -107,8 +107,9 @@ function Header() {
       <div className={cx("inner")}>
         {/* logo*/}
         <Link to={config.routes.home} className={cx('logo-link')}>
-        <img src={images.logo} alt="Tiktok" /></Link>
-
+        <img src={images.logo} alt="Tiktok" />
+        </Link>
+  
 {/* Search */}
 <Search/>
         <div className={cx("actions")}>
